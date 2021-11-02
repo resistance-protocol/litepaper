@@ -19,14 +19,14 @@ The Resistance Protocol is designed to let RSX never be cheaper than Price Floor
 case the arbitrageur may buy RSX from the pool below PF and sell RSX to the
 protocol at PF. The arbitrage brings RSX back to PF. That way RSX provides
 opportunity for stakeholders while ensuring the lower bound of its trading
-range. Nobody has ever have to buy RSX for more than PC.
+range.  Nobody has ever have to sell RSX for less than PF.
 
 The Resistance Protocol is designed to let RSX never be more expensive than
 Price Ceiling (PC). While RSX may trade above PC an arbitrage opportunity opens
 up. In this case the arbitrageur may buy RSX from the protocol at PC and sell
 RSX to the pool above PC. The arbitrage brings RSX back to PC. That way RSX
 provides opportunity for stakeholders while ensuring the upper bound of its
-trading range. Nobody has ever have to sell RSX for less than PF.
+trading range. Nobody has ever have to buy RSX for more than PC.
 
 The Resistance Protocol is designed to take in any RSX excess supply at PF and
 give out any RSX excess demand at PC. Since any RSX in circulation was initially
@@ -39,10 +39,20 @@ PF and PC will increase together as long as the treasury owns the required
 excess reserves to ensure RFV for the outstanding RSX supply. The described
 design has the following benefits.
 
+- RSX is always guaranteed to be redeemable for RFV at PF.
 - RFV for RSX can only go up, but never down.
 - The trading range between PF and PC offers opportunities and promotes economic
   activity at all times.
 - Excess demand can never increase stakeholder risk beyond the PF/PC multiple.
+
+Below a simulation of RFV considering PF and PC. The economical model assumes an
+initial PF of 0.10 DAI. PC has a monetary premium of 500% at all times, that is
+an initial PC of 0.50 DAI. The economical model assumes an initial capital
+inflow of 10M after launch at the initial PC. The step function of the model
+simulates 100k capital inflow per time unit. The model simulates 1000 of these
+iterations resulting in 100M capital inflow simulated.
+
+![Price Floor / Price Ceiling](./img/price_floor_price_ceiling.png)
 
 # Deferred Bond Discounts
 
@@ -134,3 +144,21 @@ perpetuating the infinite flyhweel effect further.
 
 PF PC multiple eg 5
 rising fast early and more slowly later
+
+work the notion of "no slippage" into the litepaper when selling to or buying
+from the protocol
+
+DAI
+LUSD
+FRAX
+
+
+# Glossary
+
+- **DAI** a US Dollar pegged stablecoin
+- **DBD** deferred bond discounts, a futures contract selling discounted RSX over time for reserve assets
+- **PC** price ceiling, the lower bound of the RSX trading range
+- **PF** price floor, the upper bound of the RSX trading range
+- **POL** protocol owned liquidity, the liquidity owned by the protocol
+- **RFV** risk free value, the amount of reserve assets guaranteed to be redeemable for RSX
+- **RSX** the native token of the Resistance Protocol
