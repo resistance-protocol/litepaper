@@ -48,9 +48,22 @@ design has the following benefits.
 Below a simulation of RFV considering PF and PC. The economical model assumes an
 initial PF of 0.10 DAI. PC has a monetary premium of 500% at all times, that is
 an initial PC of 0.50 DAI. The economical model assumes an initial capital
-inflow of 10M after launch at the initial PC. The step function of the model
-simulates 100k capital inflow per time unit. The model simulates 1000 of these
-iterations resulting in 100M capital inflow simulated.
+inflow of 10M after launch at the initial PC. The step function of the
+economical model simulates 100k capital inflow per time unit. The economical
+model simulates 1000 of these iterations resulting in a total of 100M capital
+inflow simulated. The dashed yellow line along the x-axis represents the point
+of break even of the initial 10M capital invested after launch. That is,
+everyone having invested at launch is guaranteed to not at least receive RFV for
+their initial position after roughly 4M capital inflow from after launch. The
+solid yellow line between PF and PC shows the achieved RFV multiple for the
+first 10M invested after launch. The economical model predicts a 5x on RFV at PF
+for the first 10M invested after launch, once 100M in total have been flowing
+into the system. Note that at this point the achieved multiple would be around
+25 at PC. The economical model assumes a PF growth rate of initially 20%. The
+initial growth rate reduces by 5% after each PF increase until a final growth
+rate of 1% is reached. Note that 10% of all capital inflow is deducted as
+[protocol revenue streams](#protocol-revenue-streams) for the DAO treasury and
+the innovation fund.
 
 ![Price Floor / Price Ceiling](./img/price_floor_price_ceiling.png)
 
@@ -59,9 +72,9 @@ iterations resulting in 100M capital inflow simulated.
 The Resistance Protocol is designed to sell bonds at a simple static discount,
 e.g. 5%, as long as the current RSX price is above PF and below PC. That means
 no bonds are sold below PF and above PC, because at these levels the Resistance
-protocol enables floor and ceiling peg arbitrage. The vesting term for
-Resistance bonds may be about 7 days, during which RSX vests linearly. The
-limiting factor for a healthy supply and demand dynamic will be the bond
+Protocol enables floor and ceiling peg arbitrage. The vesting term for
+Resistance Protocol bonds may be about 7 days, during which RSX vests linearly.
+The limiting factor for a healthy supply and demand dynamic will be the bond
 capacity at a given RSX price. While the same discount applies regardless the
 RSX price, Resistance sells bonds at a determined volume per time unit. For
 instance 1k bond volume per minute would result in 1.44M available bond volume
@@ -69,11 +82,24 @@ per day. Should available bond volume be bought up, then no more bonds can sell
 until the next time window opens up new capacity. The described design has the
 following benefits.
 
-- The static discount makes Resistance bonds easy to understand and easy to use.
-- The volume per time unit dynamic makes Resistance bonds easy to manage and
-  governance minimizes.
-- The simple design of Resistance bonds enables changes in bond volume to have
-  immediate effects.
+- The static discount makes Resistance Protocol bonds easy to understand and
+  easy to use for stakeholders.
+- The volume per time unit dynamic makes Resistance Protocol bonds easy to
+  manage and automates governance.
+- The simple design of Resistance Protocol bonds enables changes in bond volume
+  to have immediate effects.
+
+Below a simulation of DBD. The economical model assumes a PF of 1 and a PC of 5.
+The solid green line shows the effective discount in relation to the solid blue
+line representing the RSX price. While the bond discount remains static the
+absolute discount in DAI terms reduces linearly along the RSX price up to
+boundaries of PF and PC. The economical model shows that discounts never yield
+below PF and above PC. Further we can see how volume per time unit scales
+linearly along the RSX price curve as well. Bond volume reduces to 0% towards PF
+and increases to 100% towards PC, all the while respecting boundaries of PF and
+PC each.
+
+![Bond Discounts / Bond Volume](./img/bond_discounts_bond_volume.png)
 
 # Protocol Owned Liquidity
 
@@ -138,7 +164,7 @@ above PC provides tremendous opportunities for arbitrageurs to bring RSX back to
 PC. The dominant strategy for RSX trading above or near PC is to short RSX,
 perpetuating the infinite flyhweel effect further.
 
-
+bond volume produces sell preasure to drive RSX price towards PF
 
 # Initial Network State
 
