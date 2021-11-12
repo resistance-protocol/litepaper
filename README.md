@@ -33,7 +33,7 @@ give out any RSX excess demand at PC. Since any RSX in circulation was initially
 minted at a multiple of its backing cost, any RSX taken out of circulation at PF
 reduces the treasury's burden of backing while increasing its relative excess
 reserves. Conversely any RSX sold by the Resistance Protocol at PC increases
-excess reserves more than circulating supply due to the monetary premium of
+excess reserves more than circulating supply due to the Monetary Premium (MP) of
 backing at PF.
 
 The Resistance Protocol is designed to let RFV appreciate over time. That means
@@ -41,31 +41,34 @@ PF and PC will increase together as long as the treasury owns the required
 excess reserves to ensure RFV for the outstanding RSX circulating supply. The
 described design has the following benefits.
 
-- RSX is always guaranteed to be redeemable for RFV at PF.
+- RSX is always guaranteed to be redeemable for RFV at PF without any slippage
+  or market impact.
+- RSX is always guaranteed to be available for a MP at PC without any slippage
+  or market impact.
 - RFV for RSX can only go up, but never down.
 - The trading range between PF and PC offers opportunities and promotes economic
   activity at all times.
 - Excess demand can never increase stakeholder risk beyond the PC/PF multiple.
 
 Below a simulation of RFV considering PF and PC. The economical model assumes an
-initial PF of 0.10 DAI. PC has a monetary premium of 500% at all times, that is
-an initial PC of 0.50 DAI. The economical model assumes an initial capital
-inflow of 10M after launch at the initial PC. The step function of the
-economical model simulates 100k capital inflow per time unit. The economical
-model simulates 1000 of these time unit iterations resulting in a total of 100M
-capital inflow simulated. The dashed yellow line along the x-axis represents the
-point of break even of the initial 10M capital invested after launch. That is,
-everyone having invested at launch is guaranteed to receive at least RFV for
-their initial position after roughly 4M additional capital inflow after launch.
-The solid yellow line between PF and PC shows the achieved RFV multiple for the
-first 10M invested after launch. The economical model predicts a 5x on RFV at PF
-for the first 10M invested after launch, once 100M in total have been flowing
-into the system. Note that at this point the achieved multiple would be around
-25x at PC. The economical model assumes a PF growth rate of initially 20%. The
-initial growth rate reduces by 5% after each PF increase until a final growth
-rate of 1% is reached. Note that 10% of all capital inflow is deducted as
-[protocol revenue streams](#protocol-revenue-streams) for the DAO treasury and
-the innovation fund.
+initial PF of 0.10 DAI. PC has a MP of 500% at all times, that is an initial PC
+of 0.50 DAI. The economical model assumes an initial capital inflow of 10M after
+launch at the initial PC. The step function of the economical model simulates
+100k capital inflow per time unit. The economical model simulates 1000 of these
+time unit iterations resulting in a total of 100M capital inflow simulated. The
+dashed yellow line along the x-axis represents the point of break even of the
+initial 10M capital invested after launch. That is, everyone having invested at
+launch is guaranteed to receive at least RFV for their initial position after
+roughly 4M additional capital inflow after launch. The solid yellow line between
+PF and PC shows the achieved RFV multiple for the first 10M invested after
+launch. The economical model predicts a 5x on RFV at PF for the first 10M
+invested after launch, once 100M in total have been flowing into the system.
+Note that at this point the achieved multiple would be around 25x at PC. The
+economical model assumes a PF growth rate of initially 20%. The initial growth
+rate reduces by 5% after each PF increase until a final growth rate of 1% is
+reached. Note that 10% of all capital inflow is deducted as [protocol revenue
+streams](#protocol-revenue-streams) for the DAO treasury and the innovation
+fund.
 
 ![Price Floor / Price Ceiling](./img/price_floor_price_ceiling.png)
 
@@ -157,6 +160,7 @@ spot and waiting for e.g. RFV appreciation which is built into the system.
 governance minimization
 on chain voting
 beneficiary addresses
+guardian address
 
 # Zero Knowledge Rollup
 
@@ -166,8 +170,8 @@ zksync
 
 innovation fund
 POL trading fees
-monetary premium from bonding
-monetary premium from floor and ceiling peg arbitrage
+MP from bonding
+MP from floor and ceiling peg arbitrage
 towers game
 
 # Infinite Flywheel Effect
@@ -187,13 +191,13 @@ below or near PF is to long RSX, perpetuating the infinite flyhweel effect
 further.
 
 RSX moving inbetween PF and PC implies increasing RFV by selling bonds for e.g.
-DAI at a discounted monetary premium on top of PF. That means the treasury
-increases excess reserves later used to raise the PF. RSX trading between PF and
-PC is good for the treasury's capital efficiency and therefore in last
-consequence good for stakeholders. RSX trading between PF and PC provides
-tremendous opportunities for bonders to benefit from the available bonding
-capacity. The dominant strategy for RSX trading between PF and PC is to bond
-e.g. DAI for RSX, perpetuating the infinite flyhweel effect further.
+DAI at a discounted MP on top of PF. That means the treasury increases excess
+reserves later used to raise the PF. RSX trading between PF and PC is good for
+the treasury's capital efficiency and therefore in last consequence good for
+stakeholders. RSX trading between PF and PC provides tremendous opportunities
+for bonders to benefit from the available bonding capacity. The dominant
+strategy for RSX trading between PF and PC is to bond e.g. DAI for RSX,
+perpetuating the infinite flyhweel effect further.
 
 RSX moving above PC implies increasing RFV by selling RSX into the market for
 e.g. DAI. RSX trading above PC is good for the treasury's capital efficiency and
@@ -204,11 +208,10 @@ the infinite flyhweel effect further.
 
 # Initial Network State
 
-PF PC multiple eg 5
-rising fast early and more slowly later
+PF PC multiple eg 5, PF of 0.10, PC of 0.50
 
-work the notion of "no slippage" into the litepaper when selling to or buying
-from the protocol
+groth rate of 20%, reduces 5% each iteration, lands at 1% growth rate, rising
+fast early and more slowly later
 
 DAI
 LUSD
@@ -222,6 +225,7 @@ later pool launch
 
 - **DAI** a US Dollar pegged stablecoin
 - **DBD** deferred bond discounts, a futures contract selling discounted RSX over time for reserve assets
+- **MP** monetary premium, the amount of money paid on top of risk free value
 - **PC** price ceiling, the lower bound of the RSX trading range
 - **PF** price floor, the upper bound of the RSX trading range
 - **POL** protocol owned liquidity, the liquidity owned by the protocol
