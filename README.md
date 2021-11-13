@@ -145,22 +145,57 @@ extend of RSX being redeemed. The described design has the following benefits.
 # Non-Custodial Design
 
 The Resistance Protocol is designed to be non-custodial. That means RSX tokens
-of stakeholders will ever be held by the protocol's smart contracts in order for
-stakeholders to benefit from economical activity. The protocol's smart contracts
-will only ever hold RFV backing RSX, plus on chain governed excess reserves. RSX
-will not be a rebasing token, nor does the system rely on staking. RSX can
-simply be held in stakeholder addresses without ever having to rely on third
-party custody. Contract interactions may only be required for buying and selling
-RSX, or for relevant on chain governance that stakeholders themselves decide to
-engage in. In most cases RSX stakerholders do not need to do more than holding
-spot and waiting for e.g. RFV appreciation which is built into the system.
+of stakeholders will never be held by the protocol's smart contracts in order
+for stakeholders to benefit from economical activity. The protocol's smart
+contracts will only ever hold RFV backing RSX, plus on chain governed excess
+reserves. RSX will not be a rebasing token, nor does the system rely on staking.
+RSX can simply be held in stakeholder addresses without ever having to rely on
+third party custody. Contract interactions may only be required for buying and
+selling RSX, or for relevant on chain governance that stakeholders themselves
+decide to engage in. In most cases RSX stakerholders do not need to do more than
+holding spot and waiting for e.g. RFV appreciation built into the system.
 
 # On Chain Governance
 
-governance minimization
-on chain voting
-beneficiary addresses
-guardian address
+The Resistance Protocol is designed to be governance minimized. Any required
+decisions for substantial protocol changes should be voted and executed upon on
+chain without any intermediary having to finally execute upon decisions. A gauge
+like voting system may be provided in which RSX holders will approve or deny any
+changes proposed. A guardian multisig will be put in place to forbid critical
+changes potentially putting the system at risk of critical failure. Decisions
+that may have to be made include, but are not limited to the following areas.
+
+- Adding and removing reserve assets, including their RFV and allocation
+  targets. Implications of adding reserve assets is to sell bonds for them. E.g.
+  adding DAI as reserve asset implies to sell DAI bonds and make RSX redeemable
+  for DAI at PF. Requires majority vote on chain.
+- Changing bond volume per time unit. Implications of changing bond volume is to
+  sell more or less bonds, eventually showing reflexive results relative to
+  current market conditions. Requires majority vote on chain.
+- Sending excess reserves to a trusted beneficiary multisig. Implications of
+  spending under-utilized excess reserves is to forfeit further PF increase once
+  it becomes to be unattainable to do so. Requires majority vote on chain.
+- Increasing PF and PC. Implications of increasing PF is for RSX to never
+  becoming cheaper than PF ever again. Available for anyone to execute as soon
+  as the system guarantees full backing at the new level.
+
+Below a simulation of excess reserves pepetuated by the [infinite flywheel
+effect](#infinite-flywheel-effect). The economical model assumes properties as
+described in the sections [Risk Free Value](#risk-free-value) and [Deferred Bond
+Discounts](#deferred-bond-discounts). Based on an initial 10M capital inflow at
+launch the protocol's excess reserves start out to be relatively high and get
+used up to increase PF relatively quickly. Moving forward the economical model
+shows how excess reserves go up and down over time. Excess reserves increasing
+means the protocol accumulates the necessary funding of backing all outstanding
+RSX circulating supply at the next level of PF increase. Once the system
+obtained enough excess reserves anyone can trigger the algorythmically defined
+PF increase. Once the system increased the PF it can never go lower again
+anymore since all treasury capital is locked for backing RSX at this point.
+Increasing PF depletes excess reserves and a new cycle of excess reserve
+accumulation begins to lift the PF again as soon as sufficient excess reserves
+accumulated.
+
+![Excess Reserves](./img/excess_reserves.png)
 
 # Zero Knowledge Rollup
 
@@ -168,11 +203,23 @@ zksync
 
 # Protocol Revenue Streams
 
-innovation fund
+The Resistance Protocol is designed to TODO where does capital come from
+
+The Resistance Protocol is designed to divert 10% of all capital inflow for
+operational expenses and future developments. Therefore 5% of all capital inflow
+will be diverted to the DAO treasury multisig intended to strategically
+compensate contributors. Furthermore 5% of all capital inflow will be diverted
+to an innovation fund multisig intended to strategically invest in paradigm
+shifting technologies.
+
 POL trading fees
 MP from bonding
 MP from floor and ceiling peg arbitrage
 towers game
+
+TODO describe simulation
+
+![DAI Backing / Market Cap](./img/dai_backing_market_cap.png)
 
 # Infinite Flywheel Effect
 
@@ -220,6 +267,8 @@ FRAX
 launch
 whitelist first before pool creation
 later pool launch
+
+seed, funding, protocol debt, founder tokens
 
 # Glossary
 
