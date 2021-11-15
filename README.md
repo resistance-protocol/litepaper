@@ -38,8 +38,14 @@ backing at PF.
 
 The Resistance Protocol is designed to let RFV appreciate over time. That means
 PF and PC will increase together as long as the treasury owns the required
-excess reserves to ensure RFV for the outstanding RSX circulating supply. The
-described design has the following benefits.
+excess reserves to ensure RFV for the outstanding RSX circulating supply. At
+some point it will become unattainable to further increaste PF and PC, simply
+because it will take longer and longer to do so. The Resistance Protocol will
+algorithmically prevent increasing the PF around a RFV multiple of around 20x.
+At this point PF should be kept stable at 10 DAO and all further excess reserves
+are diverted as [protocol revenue streams](#protocol-revenue-streams) for the
+DAO treasury and the innovation fund. The described design has the following
+benefits.
 
 - RSX is always guaranteed to be redeemable for RFV at PF without any slippage
   or market impact.
@@ -160,9 +166,9 @@ only be required for buying and selling RSX, or for relevant on chain governance
 that stakeholders themselves decide to engage in. In most cases RSX
 stakerholders do not need to do more than holding spot and waiting for e.g. RFV
 appreciation built into the system. Note that on chain coordination games like
-[0xtowers](https://github.com/0xtowers/litepaper) may require stakeholders to
-give custody of their RSX tokens to these kind of smart contracts, if
-stakeholders choose to play these games.
+[0xtowers/litepaper](https://github.com/0xtowers/litepaper) may require
+stakeholders to give custody of their RSX tokens to these kind of smart
+contracts, if stakeholders choose to play these games.
 
 # On Chain Governance
 
@@ -182,9 +188,6 @@ limited to the following areas.
 - Changing bond volume per time unit. Implications of changing bond volume is to
   sell more or less bonds, eventually showing reflexive results relative to
   current market conditions. Requires majority vote on chain.
-- Sending excess reserves to a trusted beneficiary multisig. Implications of
-  spending under-utilized excess reserves is to forfeit further PF increase once
-  it becomes unattainable to do so any further. Requires majority vote on chain.
 - Increasing PF and PC. Implications of increasing PF is for RSX to never be
   cheaper than PF ever again. Available for anyone to execute as soon as the
   system guarantees full backing at the new level.
@@ -210,7 +213,10 @@ holdings can be found in [Protocol Revenue Streams](#protocol-revenue-streams).
 
 # Zero Knowledge Rollup
 
-TODO zksync
+The Resistance Protocol and its on chain coordination games should be delpoyed
+on a zero knowledge rollup like [zksync](https://zksync.io). Its security and
+performance guarantees are perfectly suited for user facing protocols
+considering current cost of operation on Ethereum mainnet.
 
 # Protocol Revenue Streams
 
@@ -233,9 +239,10 @@ Revenue streams captured are listed below.
   strategies helping the treasury earn more while growing excess reserves for
   stakeholders.
 - A potential economical driver for RSX value accrual will be on chain
-  coordination games like [0xtowers](https://github.com/0xtowers/litepaper).
-  These coordination games will be part of the Resistance Protocol ecosystem and
-  will only be playable using RSX or its LP positions. Furthermore 5% of capital
+  coordination games like
+  [0xtowers/litepaper](https://github.com/0xtowers/litepaper). These
+  coordination games will be part of the Resistance Protocol ecosystem and will
+  only be playable using RSX or its LP positions. Furthermore 5% of capital
   inflow into these kind of on chain coordination games can be captured by the
   Resistance Protocol treasury, or alternatively burned to reduce circulating
   supply if denominated in RSX.
@@ -294,19 +301,31 @@ launch.
 
 - The initial PF will be 0.10 DAI.
 - The initial PC will be 0.50 DAI.
+- The final PF will be 10 DAI.
+- The final PC will be 50 DAI.
 - The constant MP for PC on top of PF will be 5x.
 - The initial PF growth rate will be 20%.
 - The PF growth rate will continuously reduce by 5%.
 - The final PF growth rate will be 1%.
+- The DAO treasury will receive 5% of all capital inflow until the final PF got
+  reached. Once the final PF got reached the DAO treasury will receive 50% of
+  all capital inflow.
+- The innovation fund will receive 5% of all capital inflow until the final PF
+  got reached. Once the final PF got reached the innovation fund will receive
+  50% of all capital inflow.
 - The liquidity pairs for RSX pools at launch will include several stablecoins.
 - There will be a whitelist system in place at launch.
-- There will not be any seed investments take place.
 - There will not be any founder nor team tokens.
-- The protocol will be bootstrapped by the community without accruing any
-  protocol debt and without dilluting stakeholders.
+- There will be an option for a non-diluting seed investment in form of fRSX
+  (funding-RSX). Seed investment is not necessary for Resistance Protocol to be
+  bootstrapped in first place. Though if seed investment is taken, fRSX will be
+  minted to the extend of a mutual agreement. fRSX will then vest along RSX
+  total supply and will always be redeemable at current PF. The protocol will
+  therefore be bootstrapped by the community, plus optional seed investment,
+  without accruing any protocol debt and without dilluting stakeholders.
 - The first coordination game within the Resistance Protocol ecosystem will be
-  [0xtowers](https://github.com/0xtowers/litepaper) and the game will be ready
-  to play for whitelisted stakeholders at launch.
+  [0xtowers/litepaper](https://github.com/0xtowers/litepaper). The game will be
+  ready to play for whitelisted stakeholders at launch.
 
 # Glossary
 
@@ -320,3 +339,34 @@ launch.
 - **RFV**, risk free value, the amount of reserve assets guaranteed to be
   redeemable for RSX
 - **RSX**, the native token of the Resistance Protocol
+
+# Credits
+
+The vision for Resistance Protocol could never have developed without the
+ambitions of OlympusDAO showcasing a succesful implementation of the core
+concepts described in this paper. Further there have been countless contributors
+within the DAO who inspired, encouraged and supported these efforts along the
+ideation phase. There is no Resistance Protocol without OlympusDAO.
+
+The economical models visualized in this paper have been simulated during
+countless iterations using [xh3b4sd/rsx](https://github.com/xh3b4sd/rsx). code
+history and failed attempts can be reviewed on Github. All graphs are rendered
+using [go-echarts/go-echarts](https://github.com/go-echarts/go-echarts). Most of
+the
+
+The introduction of a brand new category of on chain coordination games like
+[0xtowers/litepaper](https://github.com/0xtowers/litepaper) is a novel
+innovation developed to experiment with game theory, capital coordination,
+economical productivity and fee sharing structures.
+
+The innovation fund bootstrapped within the Resistance Protocol ecosystem is to
+move forward and give back. The most ambitious projects around the most pressing
+issues of our time are underfunded. While non of this here could ever have
+happened without the great technological advances we all operate on, the
+innovation fund seeks to spearhead and backpropagate autonomously without any
+restrictions to better the trajectory of our civilization.
+
+A hand full of degens have helped tremendously during early development of smart
+contracts and their simulations. Without these kinds of educational,
+inspirational, technical and moral support this paper could not have been
+written in the first place.
