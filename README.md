@@ -99,10 +99,10 @@ The solid green line shows the effective discount in relation to the solid blue
 line representing the RSX price. While the bond discount remains static the
 absolute discount in DAI terms reduces linearly along the RSX price up to
 boundaries of PF and PC. The economical model shows that discounts never yield
-below PF and above PC. Further we can see how volume per time unit scales
-linearly along the RSX price curve as well on the x-axis. Bond volume reduces to
-0% per time unit towards PF and increases to 100% per time unit towards PC, all
-the while respecting boundaries of PF and PC each.
+below PF nor above PC. Further we can see how volume per time unit scales
+linearly along the RSX price curve on the x-axis. Bond volume reduces to 0% per
+time unit towards PF and increases to 100% per time unit towards PC, all the
+while respecting boundaries of PF and PC each.
 
 ![Bond Discounts / Bond Volume](./img/bond_discounts_bond_volume.png)
 
@@ -116,29 +116,33 @@ RSX will always be minted against and be backed by a given RFV per asset. DAI,
 FRAX and LUSD will have a RFV of 1. Euro stables may have a dynamic RFV of 1.15
 in the future. Volatile assets like ETH and OHM may receive their own RFV upon
 on chain governance. Since volatile assets have to be heavily discounted, they
-are more capital inefficient, even though they may contribute more greatly to
-trading fees earned.
+are more capital inefficient and will therefore not be acquired by the protocol
+at launch. Once the Resistance Protocol got bootstrapped volatile assets may be
+voted in via on chain governance so they may contribute more greatly to trading
+fees earned due to their volatile nature.
 
 The Resistance Protocol is designed to introduce friction into the market where
 earning more from trading fees is required. Given 4 different liquidity pools,
-the Resistance Protocol can periodically buy from and sell to 1 of the pools in
-order to create an imbalance in one place. This imbalance should then be taken
-advatange of by arbitrageurs, effectively producing trading fees earned by the
-protocol. While introducing this friction in one place causes costs, harnessing
-trading fees produced by this imbalance from three other places should not only
-offset the initial cost, but also yield a net positive for the treasury.
+the Resistance Protocol can periodically buy from and sell to 1 of the available
+pools using minted RSX in order to create an imbalance in one place. This
+imbalance should then be taken advatange of by arbitrageurs, effectively
+producing trading fees earned by the protocol. While introducing this friction
+in one place causes costs, harnessing trading fees produced by this imbalance
+from three other places should not only offset the initial cost, but also yield
+a net positive for the treasury.
 
-The Resistance Protocol is designed to acquire and retain POL by selling bonds.
-Stakeholders bring e.g. DAI and get e.g. discounted RSX. The bonded DAI will be
-matched by the protocol minting RSX in order to add most of the treasury's
-backing as liquidity to the protocol owned pools. Should backing be required by
-users, then liquidity is removed again from the protocol owned pools to the
-extend of RSX being redeemed. The described design has the following benefits.
+The Resistance Protocol is designed to acquire and retain POL by exclusively
+selling reserve bonds. Stakeholders bring e.g. DAI and get e.g. discounted RSX.
+The bonded DAI will be matched by the protocol minting RSX in order to add most
+of the treasury's backing as liquidity to the protocol owned pools. Should
+backing be required by users, then liquidity is removed programmatically on
+demand from the protocol owned pools, to the extend of RSX being redeemed. The
+described design has the following benefits.
 
 - All of the RFV backing RSX, minus an operational buffer, will be utilized for
   POL, making the protocol most capital efficient.
 - All RSX within the protocol owned pools is dynamically minted against the RFV
-  provided by stakeholders.
+  provided by stakeholders, making the protocol most capital efficient.
 - All of the POL is backing RSX at RFV at a capital efficiency of 100%. No
   liquidity has to be discounted for backing RSX.
 
@@ -149,11 +153,16 @@ of stakeholders will never be held by the protocol's smart contracts in order
 for stakeholders to benefit from economical activity. The protocol's smart
 contracts will only ever hold RFV backing RSX, plus on chain governed excess
 reserves. RSX will not be a rebasing token, nor does the system rely on staking.
-RSX can simply be held in stakeholder addresses without ever having to rely on
-third party custody. Contract interactions may only be required for buying and
-selling RSX, or for relevant on chain governance that stakeholders themselves
-decide to engage in. In most cases RSX stakerholders do not need to do more than
-holding spot and waiting for e.g. RFV appreciation built into the system.
+There will be no liquidity mining incentives and no rewards will be given out
+for rent seeking behaviour. RSX can simply be held in stakeholder addresses
+without ever having to rely on third party custody. Contract interactions may
+only be required for buying and selling RSX, or for relevant on chain governance
+that stakeholders themselves decide to engage in. In most cases RSX
+stakerholders do not need to do more than holding spot and waiting for e.g. RFV
+appreciation built into the system. Note that on chain coordination games like
+[0xtowers](https://github.com/0xtowers/litepaper) may require stakeholders to
+give custody of their RSX tokens to these kind of smart contracts, if
+stakeholders choose to play these games.
 
 # On Chain Governance
 
@@ -162,62 +171,85 @@ decisions for substantial protocol changes should be voted and executed upon on
 chain without any intermediary having to finally execute upon decisions. A gauge
 like voting system may be provided in which RSX holders will approve or deny any
 changes proposed. A guardian multisig will be put in place to forbid critical
-changes potentially putting the system at risk of critical failure. Decisions
-that may have to be made include, but are not limited to the following areas.
+changes potentially putting the system at risk of failure during the
+bootstrapping period. Decisions that may have to be made include, but are not
+limited to the following areas.
 
 - Adding and removing reserve assets, including their RFV and allocation
   targets. Implications of adding reserve assets is to sell bonds for them. E.g.
-  adding DAI as reserve asset implies to sell DAI bonds and make RSX redeemable
-  for DAI at PF. Requires majority vote on chain.
+  adding DAI as reserve asset implies to sell DAI bonds, have RSX/DAI POL and
+  make RSX redeemable for DAI at PF. Requires majority vote on chain.
 - Changing bond volume per time unit. Implications of changing bond volume is to
   sell more or less bonds, eventually showing reflexive results relative to
   current market conditions. Requires majority vote on chain.
 - Sending excess reserves to a trusted beneficiary multisig. Implications of
   spending under-utilized excess reserves is to forfeit further PF increase once
-  it becomes to be unattainable to do so. Requires majority vote on chain.
-- Increasing PF and PC. Implications of increasing PF is for RSX to never
-  becoming cheaper than PF ever again. Available for anyone to execute as soon
-  as the system guarantees full backing at the new level.
+  it becomes unattainable to do so any further. Requires majority vote on chain.
+- Increasing PF and PC. Implications of increasing PF is for RSX to never be
+  cheaper than PF ever again. Available for anyone to execute as soon as the
+  system guarantees full backing at the new level.
 
-Below a simulation of excess reserves pepetuated by the [infinite flywheel
-effect](#infinite-flywheel-effect). The economical model assumes properties as
+Below a simulation of excess reserves pepetuated by the [Infinite Flywheel
+Effect](#infinite-flywheel-effect). The economical model assumes properties as
 described in the sections [Risk Free Value](#risk-free-value) and [Deferred Bond
 Discounts](#deferred-bond-discounts). Based on an initial 10M capital inflow at
 launch the protocol's excess reserves start out to be relatively high and get
 used up to increase PF relatively quickly. Moving forward the economical model
 shows how excess reserves go up and down over time. Excess reserves increasing
 means the protocol accumulates the necessary funding of backing all outstanding
-RSX circulating supply at the next level of PF increase. Once the system
-obtained enough excess reserves anyone can trigger the algorythmically defined
-PF increase. Once the system increased the PF it can never go lower again
-anymore since all treasury capital is locked for backing RSX at this point.
-Increasing PF depletes excess reserves and a new cycle of excess reserve
-accumulation begins to lift the PF again as soon as sufficient excess reserves
-accumulated.
+RSX circulating supply at the next level of PF. Once the system obtained enough
+excess reserves anyone can trigger the algorythmically defined PF increase. Once
+the system increased the PF it can never go lower again anymore since all
+treasury capital is locked for backing RSX at this point. Increasing PF depletes
+excess reserves and a new cycle of excess reserve accumulation begins to lift
+the PF again as soon as sufficient excess reserves accumulated. The model does
+also show DAO holdings over time for comparision. More information on DAO
+holdings can be found in [Protocol Revenue Streams](#protocol-revenue-streams).
 
-![Excess Reserves](./img/excess_reserves.png)
+![Excess Reserves / DAO Holdings](./img/excess_reserves_dao_holdings.png)
 
 # Zero Knowledge Rollup
 
-zksync
+TODO zksync
 
 # Protocol Revenue Streams
-
-The Resistance Protocol is designed to TODO where does capital come from
 
 The Resistance Protocol is designed to divert 10% of all capital inflow for
 operational expenses and future developments. Therefore 5% of all capital inflow
 will be diverted to the DAO treasury multisig intended to strategically
 compensate contributors. Furthermore 5% of all capital inflow will be diverted
 to an innovation fund multisig intended to strategically invest in paradigm
-shifting technologies.
+shifting technologies. Note that the innovation fund will operate autonomously
+and investments may or may not be related to the Resistance Protocol ecosystem.
+Revenue streams captured are listed below.
 
-POL trading fees
-MP from bonding
-MP from floor and ceiling peg arbitrage
-towers game
+- Especially early on the main revenue stream will be based on the MP earned
+  from bonding, as well as from floor and ceiling peg arbitrage. The vast amount
+  of treasury assets should come from this kind of MP.
+- Over time trading fees coming from POL should become a secondary driver of
+  treasury value accrual. This will be possible by deploying treasury assets
+  which are backing RSX into RSX related LP positions.
+- Once established, some excess reserves should be deployed in risk minimized
+  strategies helping the treasury earn more while growing excess reserves for
+  stakeholders.
+- A potential economical driver for RSX value accrual will be on chain
+  coordination games like [0xtowers](https://github.com/0xtowers/litepaper).
+  These coordination games will be part of the Resistance Protocol ecosystem and
+  will only be playable using RSX or its LP positions. Furthermore 5% of capital
+  inflow into these kind of on chain coordination games can be captured by the
+  Resistance Protocol treasury, or alternatively burned to reduce circulating
+  supply if denominated in RSX.
 
-TODO describe simulation
+Below a simulation of DAI backing in relation to market cap pepetuated by the
+[Infinite Flywheel Effect](#infinite-flywheel-effect). The economical model
+assumes properties as described in the sections [Risk Free
+Value](#risk-free-value) and [Deferred Bond
+Discounts](#deferred-bond-discounts). Reserve assets backing outstanding RSX
+circulating supply increase linearly with capital inflow, minus the 10% diverted
+for DAO treasury and the innovation fund. Since PF and PC increase over time
+market cap grows proportionally. The economical model described arrives at below
+500M market cap given 100M gradual capital inflow and 10M initial capital inflow
+at launch.
 
 ![DAI Backing / Market Cap](./img/dai_backing_market_cap.png)
 
@@ -253,30 +285,38 @@ provides tremendous opportunities for arbitrageurs to bring RSX back to PC. The
 dominant strategy for RSX trading above or near PC is to short RSX, perpetuating
 the infinite flyhweel effect further.
 
+![Inifinite Flywheel Effect](./img/infinite_flywheel_effect.png)
+
 # Initial Network State
 
-PF PC multiple eg 5, PF of 0.10, PC of 0.50
+Following is a list of properties suggested for the initial network state at
+launch.
 
-groth rate of 20%, reduces 5% each iteration, lands at 1% growth rate, rising
-fast early and more slowly later
-
-DAI
-LUSD
-FRAX
-
-launch
-whitelist first before pool creation
-later pool launch
-
-seed, funding, protocol debt, founder tokens
+- The initial PF will be 0.10 DAI.
+- The initial PC will be 0.50 DAI.
+- The constant MP for PC on top of PF will be 5x.
+- The initial PF growth rate will be 20%.
+- The PF growth rate will continuously reduce by 5%.
+- The final PF growth rate will be 1%.
+- The liquidity pairs for RSX pools at launch will include several stablecoins.
+- There will be a whitelist system in place at launch.
+- There will not be any seed investments take place.
+- There will not be any founder nor team tokens.
+- The protocol will be bootstrapped by the community without accruing any
+  protocol debt and without dilluting stakeholders.
+- The first coordination game within the Resistance Protocol ecosystem will be
+  [0xtowers](https://github.com/0xtowers/litepaper) and the game will be ready
+  to play for whitelisted stakeholders at launch.
 
 # Glossary
 
-- **DAI** a US Dollar pegged stablecoin
-- **DBD** deferred bond discounts, a futures contract selling discounted RSX over time for reserve assets
-- **MP** monetary premium, the amount of money paid on top of risk free value
-- **PC** price ceiling, the lower bound of the RSX trading range
-- **PF** price floor, the upper bound of the RSX trading range
-- **POL** protocol owned liquidity, the liquidity owned by the protocol
-- **RFV** risk free value, the amount of reserve assets guaranteed to be redeemable for RSX
-- **RSX** the native token of the Resistance Protocol
+- **DAI**, a US Dollar pegged stablecoin
+- **DBD**, deferred bond discounts, a futures contract selling discounted RSX
+  over time for reserve assets
+- **MP**, monetary premium, the amount of money paid on top of risk free value
+- **PC**, price ceiling, the lower bound of the RSX trading range
+- **PF**, price floor, the upper bound of the RSX trading range
+- **POL**, protocol owned liquidity, the liquidity owned by the protocol
+- **RFV**, risk free value, the amount of reserve assets guaranteed to be
+  redeemable for RSX
+- **RSX**, the native token of the Resistance Protocol
