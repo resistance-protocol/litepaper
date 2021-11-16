@@ -42,7 +42,7 @@ excess reserves to ensure RFV for the outstanding RSX circulating supply. At
 some point it will become unattainable to further increaste PF and PC, simply
 because it will take longer and longer to do so. The Resistance Protocol will
 algorithmically prevent increasing the PF around a RFV multiple of around 20x.
-At this point PF should be kept stable at 10 DAO and all further excess reserves
+At this point PF should be kept stable at 10 DAI and all further excess reserves
 are diverted as [protocol revenue streams](#protocol-revenue-streams) for the
 DAO treasury and the innovation fund. The described design has the following
 benefits.
@@ -54,7 +54,8 @@ benefits.
 - RFV for RSX can only go up, but never down.
 - The trading range between PF and PC offers opportunities and promotes economic
   activity at all times.
-- Excess demand can never increase stakeholder risk beyond the PC/PF multiple.
+- Excess demand can never increase stakeholder risk beyond the verifiable PC/PF
+  multiple.
 
 Below a simulation of RFV considering PF and PC. The economical model assumes an
 initial PF of 0.10 DAI. PC has a MP of 500% at all times, that is an initial PC
@@ -80,35 +81,32 @@ fund.
 
 # Deferred Bond Discounts
 
-The Resistance Protocol is designed to sell reserve bonds at a simple static
-discount, e.g. 5%, as long as the current RSX price is above PF and below PC.
-That means no bonds are sold below PF nor above PC, because at these levels the
+The Resistance Protocol is designed to sell reserve bonds at a demand based
+discount as long as the discounted RSX price is above PF and below PC. That
+means no bonds are sold below PF nor above PC, because at these levels the
 Resistance Protocol enables "floor and ceiling peg arbitrage". The vesting term
-for Resistance Protocol bonds may be about 7 days, during which RSX vests
-linearly. The limiting factor for a healthy supply and demand dynamic will be
-the bond capacity at a given RSX price. While the same discount applies
-regardless the RSX price, the Resistance Protocol sells bonds at a determined
-volume per time unit. For instance 1k bond volume per minute would result in
-1.44M available bond volume per day. Should available bond volume be bought up,
-then no more bonds can sell until the next time window opens up new capacity.
-The described design has the following benefits.
+for Resistance Protocol bonds may be about 7 days, during which the discounted
+RSX vests linearly. Bond volume will be determined on a time unit basis. For
+instance the maximum bond volume right below PC might be 1k per minute, which
+would result in 1.44M available bond volume per day. Should available bond
+volume be bought up, then no more bonds can sell until the next time window
+opens up new bond volume. The described design has the following benefits.
 
-- The static discount makes Resistance Protocol bonds easy to understand and
-  easy to use for stakeholders.
 - The volume per time unit dynamic makes Resistance Protocol bonds easy to
   manage and automates governance.
 - The simple design of Resistance Protocol bonds enables changes in bond volume
   to have immediate effects.
+- The dynamic bond volume scaling along bond discounts restricts the secondary
+  market in a deterministic way.
 
 Below a simulation of DBD. The economical model assumes a PF of 1 and a PC of 5.
-The solid green line shows the effective discount in relation to the solid blue
-line representing the RSX price. While the bond discount remains static the
-absolute discount in DAI terms reduces linearly along the RSX price up to
-boundaries of PF and PC. The economical model shows that discounts never yield
-below PF nor above PC. Further we can see how volume per time unit scales
-linearly along the RSX price curve on the x-axis. Bond volume reduces to 0% per
-time unit towards PF and increases to 100% per time unit towards PC, all the
-while respecting boundaries of PF and PC each.
+The economical model assumes a static discount of 10% for educational purposes
+within this paper. The solid green line shows the effective discount in relation
+to the solid blue line representing the RSX price. The economical model shows
+that discounts never yield below PF nor above PC. Further we can see how volume
+per time unit scales linearly along the RSX price curve on the x-axis. Bond
+volume reduces to 0% per time unit towards PF and increases to 100% per time
+unit towards PC, all the while respecting boundaries of PF and PC each.
 
 ![Bond Discounts / Bond Volume](./img/bond_discounts_bond_volume.png)
 
@@ -284,7 +282,7 @@ DAI at a discounted MP on top of PF. That means the treasury increases excess
 reserves later used to raise the PF. RSX trading between PF and PC is good for
 the treasury's capital efficiency and therefore in last consequence good for
 stakeholders. RSX trading between PF and PC provides tremendous opportunities
-for bonders to benefit from the available bonding capacity. The dominant
+for bonders to benefit from the available bond volume. The dominant
 strategy for RSX trading between PF and PC is to bond e.g. DAI for RSX,
 perpetuating the infinite flyhweel effect further.
 
@@ -313,9 +311,10 @@ launch.
 - The innovation fund will receive 5% of all capital inflow until the final PF
   got reached. Once the final PF got reached the innovation fund will receive
   50% of all capital inflow.
-- The initial bond discount will be 5%. The initial bond volume will be around
-  400 DAI per minute, meaning 576k per day. The initial max payout per bond will
-  be 100k.
+- The initial bond discount will be 5%. The initial vesting term will be 7 days.
+  The initial bond volume will be 400 DAI per minute, meaning 576k per day at
+  100% bond volume right below PC. The initial max payout per bond will be a
+  static 100k.
 - The liquidity pairs for RSX pools at launch will include several stablecoins.
 - There will be a whitelist system in place at launch.
 - There will not be any founder nor team tokens. There will be an option for a
