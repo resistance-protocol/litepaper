@@ -36,6 +36,10 @@ reserves. Conversely any RSX sold by the Resistance Protocol at PC increases
 excess reserves more than circulating supply due to the Monetary Premium (MP) of
 backing at PF.
 
+The Resistance Protocol is designed to mint RSX against RFV per asset. DAI, FRAX
+and LUSD will have a RFV of 1. Euro stables may have a RFV of 1.15. Volatile
+assets like ETH and OHM may be acquired in the future but not minted against.
+
 The Resistance Protocol is designed to let RFV appreciate over time. That means
 PF and PC will increase together as long as the treasury owns the required
 excess reserves to ensure RFV for the outstanding RSX circulating supply. At
@@ -116,14 +120,8 @@ The Resistance Protocol is designed to acquire and retain POL in perpetuity. The
 market for RSX will be built to be volatile within the trading range defined by
 PF and PC. Multiple smaller pools should be created at the start so that the
 protocol can earn trading fees based on arbitrage between these different pools.
-RSX will always be minted against and be backed by a given RFV per asset. DAI,
-FRAX and LUSD will have a RFV of 1. Euro stables may have a dynamic RFV of 1.15
-in the future. Volatile assets like ETH and OHM may receive their own RFV upon
-on chain governance. Since volatile assets have to be heavily discounted, they
-are more capital inefficient and will therefore not be acquired by the protocol
-at launch. Once the Resistance Protocol got bootstrapped volatile assets may be
-voted in via on chain governance so they may contribute more greatly to trading
-fees earned due to their volatile nature.
+
+TODO write simulation for introducing friction
 
 The Resistance Protocol is designed to introduce friction into the market where
 earning more from trading fees is required. Given 4 different liquidity pools,
@@ -179,10 +177,10 @@ changes potentially putting the system at risk of failure during the
 bootstrapping period. Decisions that may have to be made include, but are not
 limited to the following areas.
 
-- Adding and removing reserve assets, including their RFV and allocation
-  targets. Implications of adding reserve assets is to sell bonds for them. E.g.
-  adding DAI as reserve asset implies to sell DAI bonds, have RSX/DAI POL and
-  make RSX redeemable for DAI at PF. Requires majority vote on chain.
+- Adding, changing and removing reserve assets, including their RFV and
+  allocation targets. Implications of adding reserve assets is to sell bonds for
+  them. E.g. adding DAI as reserve asset implies to sell DAI bonds, have RSX/DAI
+  POL and make RSX redeemable for DAI at PF. Requires majority vote on chain.
 - Changing bond volume per time unit. Implications of changing bond volume is to
   sell more or less bonds, eventually showing reflexive results relative to
   current market conditions. Requires majority vote on chain.
