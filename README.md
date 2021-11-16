@@ -299,30 +299,30 @@ the infinite flyhweel effect further.
 Following is a list of properties suggested for the initial network state at
 launch.
 
-- The initial PF will be 0.10 DAI.
-- The initial PC will be 0.50 DAI.
-- The final PF will be 10 DAI.
-- The final PC will be 50 DAI.
+- The initial PF will be 0.10 DAI. The initial PC will be 0.50 DAI. The final PF
+  will be 10 DAI. The final PC will be 50 DAI.
 - The constant MP for PC on top of PF will be 5x.
-- The initial PF growth rate will be 20%.
-- The PF growth rate will continuously reduce by 5%.
-- The final PF growth rate will be 1%.
+- The initial PF growth rate will be 20%. The PF growth rate will continuously
+  reduce by 5%. The final PF growth rate will be 1%.DAO treasury
 - The DAO treasury will receive 5% of all capital inflow until the final PF got
   reached. Once the final PF got reached the DAO treasury will receive 50% of
   all capital inflow.
 - The innovation fund will receive 5% of all capital inflow until the final PF
   got reached. Once the final PF got reached the innovation fund will receive
   50% of all capital inflow.
+- The initial bond discount will be 5%. The initial bond volume will be around
+  400 DAI per minute, meaning 576k per day. The initial max payout per bond will
+  be 100k.
 - The liquidity pairs for RSX pools at launch will include several stablecoins.
 - There will be a whitelist system in place at launch.
-- There will not be any founder nor team tokens.
-- There will be an option for a non-diluting seed investment in form of fRSX
-  (funding-RSX). Seed investment is not necessary for Resistance Protocol to be
-  bootstrapped in first place. Though if seed investment is taken, fRSX will be
-  minted to the extend of a mutual agreement. fRSX will then vest along RSX
-  total supply and will always be redeemable at current PF. The protocol will
-  therefore be bootstrapped by the community, plus optional seed investment,
-  without accruing any protocol debt and without dilluting stakeholders.
+- There will not be any founder nor team tokens. There will be an option for a
+  non-diluting seed investment in form of fRSX (funding-RSX). Seed investment is
+  not necessary for Resistance Protocol to be bootstrapped in first place.
+  Though if seed investment is taken, fRSX will be minted to the extend of a
+  mutual agreement. fRSX will then vest along RSX total supply and will always
+  be redeemable at current PF. The protocol will therefore be bootstrapped by
+  the community, plus optional seed investment, without accruing any protocol
+  debt and without dilluting stakeholders.
 - The first coordination game within the Resistance Protocol ecosystem will be
   [0xtowers/litepaper](https://github.com/0xtowers/litepaper). The game will be
   ready to play for whitelisted stakeholders at launch.
