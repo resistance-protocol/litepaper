@@ -242,10 +242,13 @@ Revenue streams captured are listed below.
   coordination games like
   [0xtowers/litepaper](https://github.com/0xtowers/litepaper). These
   coordination games will be part of the Resistance Protocol ecosystem and will
-  only be playable using RSX or its LP positions. Furthermore 5% of capital
-  inflow into these kind of on chain coordination games can be captured by the
-  Resistance Protocol treasury, or alternatively burned to reduce circulating
-  supply if denominated in RSX.
+  only be playable using RSX or its LP positions. There are two benefits to this
+  dynamic. First, these kind of on chain coordination games will drive demand
+  for RSX and act as a supply sink. Second, 5% of capital inflow into these kind
+  of on chain coordination games will be captured by the innovation fund. Since
+  the captured capital will be denominated in RSX, the innovation fund will
+  programmatically redeem RSX at PF and thus reduce circulating supply while
+  increasing relative backing of RSX.
 
 Below a simulation of DAI backing in relation to market cap pepetuated by the
 [Infinite Flywheel Effect](#infinite-flywheel-effect). The economical model
