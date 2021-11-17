@@ -121,18 +121,6 @@ market for RSX will be built to be volatile within the trading range defined by
 PF and PC. Multiple smaller pools should be created at the start so that the
 protocol can earn trading fees based on arbitrage between these different pools.
 
-TODO write simulation for introducing friction
-
-The Resistance Protocol is designed to introduce friction into the market where
-earning more from trading fees is required. Given 4 different liquidity pools,
-the Resistance Protocol can periodically buy from and sell to 1 of the available
-pools using minted RSX in order to create an imbalance in one place. This
-imbalance should then be taken advatange of by arbitrageurs, effectively
-producing trading fees earned by the protocol. While introducing this friction
-in one place causes costs, harnessing trading fees produced by this imbalance
-from three other places should not only offset the initial cost, but also yield
-a net positive for the treasury.
-
 The Resistance Protocol is designed to acquire and retain POL by exclusively
 selling reserve bonds. Stakeholders bring e.g. DAI and get e.g. discounted RSX.
 The bonded DAI will be matched by the protocol minting RSX in order to add most
