@@ -34,11 +34,16 @@ minted at a multiple of its backing cost, any RSX taken out of circulation at PF
 reduces the treasury's burden of backing while increasing its relative excess
 reserves. Conversely any RSX sold by the Resistance Protocol at PC increases
 excess reserves more than circulating supply due to the Monetary Premium (MP) of
-backing at PF.
+backing at PF. The floor and ceiling peg arbitrage does not require any oracle
+to function since the protocol merely defines PF and PC algorithmically. Market
+participants will be naturally incentivized to perpetuate the [Infinite Flywheel
+Effect](#infinite-flywheel-effect) due to always present arbitrage
+opportunities.
 
 The Resistance Protocol is designed to mint RSX against RFV per asset. DAI, FRAX
 and LUSD will have a RFV of 1. Euro stables may have a RFV of 1.15. Volatile
-assets like ETH and OHM may be acquired in the future but not minted against.
+assets like ETH and OHM may be acquired in the future but will not be minted
+against.
 
 The Resistance Protocol is designed to let RFV appreciate over time. That means
 PF and PC will increase together as long as the treasury owns the required
@@ -86,22 +91,24 @@ fund.
 # Deferred Bond Discounts
 
 The Resistance Protocol is designed to sell reserve bonds at a demand based
-discount as long as the discounted RSX price is above PF and below PC. That
-means no bonds are sold below PF nor above PC, because at these levels the
-Resistance Protocol enables "floor and ceiling peg arbitrage". The vesting term
-for Resistance Protocol bonds may be about 7 days, during which the discounted
-RSX vests linearly. Bond volume will be determined on a time unit basis. For
-instance the maximum bond volume right below PC might be 1k per minute, which
-would result in 1.44M available bond volume per day. Should available bond
-volume be bought up, then no more bonds can sell until the next time window
-opens up new bond volume. The described design has the following benefits.
+discount as long as the discounted RSX price is above PF and below PC. The
+demand based discount mechanism does not rely on any oracle and provides a
+reliable secondary market for RSX price discovery. No bonds are sold below PF
+nor above PC, because at these levels the Resistance Protocol enables floor and
+ceiling peg arbitrage. The vesting term for Resistance Protocol bonds may be
+about 7 days, during which the discounted RSX vests linearly. Bond volume will
+be determined on a time unit basis. For instance the maximum bond volume right
+below PC might be 1k per minute, which would result in 1.44M available bond
+volume per day. Should available bond volume be bought up, then no more bonds
+can sell until the next time window opens up new bond volume. The described
+design has the following benefits.
 
 - The volume per time unit dynamic makes Resistance Protocol bonds easy to
   manage and automates governance.
 - The simple design of Resistance Protocol bonds enables changes in bond volume
   to have immediate effects.
 - The dynamic bond volume scaling along bond discounts restricts the secondary
-  market in a deterministic way.
+  market in a reflexive way.
 
 Below a simulation of DBD. The economical model assumes a PF of 1 and a PC of 5.
 The economical model assumes a static discount of 10% for educational purposes
@@ -122,7 +129,7 @@ PF and PC. Multiple smaller pools should be created at the start so that the
 protocol can earn trading fees based on arbitrage between these different pools.
 
 The Resistance Protocol is designed to acquire and retain POL by exclusively
-selling reserve bonds. Stakeholders bring e.g. DAI and get e.g. discounted RSX.
+selling reserve bonds. Stakeholders bring e.g. DAI and receive discounted RSX.
 The bonded DAI will be matched by the protocol minting RSX in order to add most
 of the treasury's backing as liquidity to the protocol owned pools. Should
 backing be required by users, then liquidity is removed programmatically on
@@ -162,16 +169,19 @@ chain without any intermediary having to finally execute upon decisions. A gauge
 like voting system may be provided in which RSX holders will approve or deny any
 changes proposed. A guardian multisig will be put in place to forbid critical
 changes potentially putting the system at risk of failure during the
-bootstrapping period. Decisions that may have to be made include, but are not
-limited to the following areas.
+bootstrapping period. Decisions that may have to be made are listed below.
 
 - Adding, changing and removing reserve assets, including their RFV and
-  allocation targets. Implications of adding reserve assets is to sell bonds for
+  allocation targets. Implication of adding reserve assets is to sell bonds for
   them. E.g. adding DAI as reserve asset implies to sell DAI bonds, have RSX/DAI
   POL and make RSX redeemable for DAI at PF. Requires majority vote on chain.
-- Changing bond volume per time unit. Implications of changing bond volume is to
-  sell more or less bonds, eventually showing reflexive results relative to
-  current market conditions. Requires majority vote on chain.
+- Changing bond properties like vesting term or volume per time unit.
+  Implication of e.g. changing bond volume is to sell more or less bonds,
+  eventually showing reflexive results relative to current market conditions.
+  Requires majority vote on chain.
+- Diverting excess reserves to trusted beneficiary multisigs. Implication of
+  utilizing excess reserves for e.g. farming is to elect and trust operators of
+  beneficiary multisigs if programmatic strategies do not suffice.
 - Increasing PF and PC. Implications of increasing PF is for RSX to never be
   cheaper than PF ever again. Available for anyone to execute as soon as the
   system guarantees full backing at the new level.
@@ -290,7 +300,7 @@ launch.
   will be 10 DAI. The final PC will be 50 DAI.
 - The constant MP for PC on top of PF will be 5x.
 - The initial PF growth rate will be 20%. The PF growth rate will continuously
-  reduce by 5%. The final PF growth rate will be 1%.DAO treasury
+  reduce by 5%. The final PF growth rate will be 1%.
 - The DAO treasury will receive 5% of all capital inflow until the final PF got
   reached. Once the final PF got reached the DAO treasury will receive 50% of
   all capital inflow.
@@ -305,7 +315,7 @@ launch.
 - There will be a whitelist system in place at launch.
 - There will not be any founder nor team tokens. There will be an option for a
   non-diluting seed investment in form of fRSX (funding-RSX). Seed investment is
-  not necessary for Resistance Protocol to be bootstrapped in first place.
+  not necessary for the Resistance Protocol to be bootstrapped in first place.
   Though if seed investment is taken, fRSX will be minted to the extend of a
   mutual agreement. fRSX will then vest along RSX total supply and will always
   be redeemable at current PF. The protocol will therefore be bootstrapped by
@@ -319,7 +329,7 @@ launch.
 
 - **DAI**, a US Dollar pegged stablecoin
 - **DBD**, deferred bond discounts, a futures contract selling discounted RSX
-  over time for reserve assets
+  over time in exchange for reserve assets
 - **MP**, monetary premium, the amount of money paid on top of risk free value
 - **PC**, price ceiling, the lower bound of the RSX trading range
 - **PF**, price floor, the upper bound of the RSX trading range
@@ -331,21 +341,20 @@ launch.
 # Credits
 
 The vision for Resistance Protocol could never have developed without the
-ambitions of OlympusDAO showcasing a succesful implementation of the core
-concepts described in this paper. Further there have been countless contributors
-within the DAO who inspired, encouraged and supported these efforts along the
-ideation phase. There is no Resistance Protocol without OlympusDAO.
+ambitions of OlympusDAO showcasing a succesful implementation of the original
+core concepts described in this paper. Further there have been countless
+contributors within the DAO who inspired, encouraged and supported these efforts
+along the ideation phase. There is no Resistance Protocol without OlympusDAO.
 
 The economical models visualized in this paper have been simulated during
-countless iterations using [xh3b4sd/rsx](https://github.com/xh3b4sd/rsx). code
+countless iterations using [xh3b4sd/rsx](https://github.com/xh3b4sd/rsx). Code
 history and failed attempts can be reviewed on Github. All graphs are rendered
-using [go-echarts/go-echarts](https://github.com/go-echarts/go-echarts). Most of
-the
+using [go-echarts/go-echarts](https://github.com/go-echarts/go-echarts).
 
 The introduction of a brand new category of on chain coordination games like
 [0xtowers/litepaper](https://github.com/0xtowers/litepaper) is a novel
 innovation developed to experiment with game theory, capital coordination,
-economical productivity and fee sharing structures.
+economical productivity and fee sharing mechanisms.
 
 The innovation fund bootstrapped within the Resistance Protocol ecosystem is to
 move forward and give back. The most ambitious projects around the most pressing
@@ -357,4 +366,4 @@ restrictions to better the trajectory of our civilization.
 A hand full of degens have helped tremendously during early development of smart
 contracts and their simulations. Without these kinds of educational,
 inspirational, technical and moral support this paper could not have been
-written in the first place.
+written in the first place. I will always be there for you.
