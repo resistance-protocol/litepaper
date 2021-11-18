@@ -48,7 +48,7 @@ against.
 The Resistance Protocol is designed to let RFV appreciate over time. That means
 PF and PC will increase together as long as the treasury owns the required
 excess reserves to ensure RFV for the outstanding RSX circulating supply. At
-some point it will become unattainable to further increaste PF and PC, simply
+some point it will become unattainable to further increase PF and PC, simply
 because it will take longer and longer to do so. The Resistance Protocol will
 algorithmically prevent increasing the PF around a RFV multiple of around 20x.
 At this point PF should be kept stable at 10 DAI and all further excess reserves
