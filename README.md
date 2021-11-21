@@ -10,7 +10,42 @@ are the next steps in the evolution of three major concepts originally developed
 by OlympusDAO. These concepts are Deferred Bond Discounts (DBD), Protocol Owned
 Liquidity (POL) and Risk Free Value (RFV). The goal of the Resistance Protocol
 and RSX is to provide stakeholders with less risk, easier use and more capital
-efficiency operating within its ecosystem.
+efficiency operating within its ecosystem. In summary, the core differences in
+architecture and mechanism design between Resistance Protocol and OlympusDAO can
+be described as follows.
+
+- Trading Range: where OHM has a lower bound and no upper bound, RSX has both, a
+  lower bound and an upper bound. That is, OHM has a static PF of 1 while not
+  having any PC. RSX has an up only PF and PC increasing together over time.
+- Redemption Guarantee: where OlympusDAO promises to buy back OHM below PF
+  manually, Resistance Protocol flips the redemption mechanic on its head using
+  programmatically enforced arbitrage. OHM is promised to be bought back by
+  OlympusDAO, while the mechanism design of RSX provides economical incentive to
+  profit from arbitrage should it trade below PF.
+- Capital Efficiency: where OHM LP is only utilized by around 5% in order to
+  account for RFV, RSX LP is matched by the protocol utilizing up to 100% of
+  backing assets for POL. There are no liquidity bonds in Resistance Protocol.
+  The Resistance Protocol does only sell reserve bonds and manages POL
+  accordingly internally.
+
+# Desired Key Objectives
+
+The Resistance Protocol aims to capture value in perpetuity for three separate
+entities. 90% of all value captured remains tight to the protocol itself in
+order to perpetuate the [Infinite Flywheel Effect](#infinite-flywheel-effect)
+further. 5% of all value captured is diverted to a DAO multisig in order to
+compensate contributors strategically. 5% of all value captured is diverted to
+an innovation fund multisig in order to strategically invest in paradigm
+shifting technologies.
+
+Furture goals have to be determined by the community and the DAO. The Resistance
+Protocol will merely provide a basis for capital and funding. Viable ideas for
+future development might be for the DAO to become a game design studio. Another
+possibility for Resistance Protocol would be to become a more potent stablecoin.
+If desired, the community may decide to bundle resources for creating its own
+Zero Knowledge Rollup (ZKR). It will be the responsibility of the community to
+create the furture of work and dream big, while the Resistance Protocol will
+only be a bootstrapping platform to enable the people coordinating around it.
 
 # Risk Free Value
 
