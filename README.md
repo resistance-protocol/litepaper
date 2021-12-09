@@ -242,7 +242,7 @@ holdings can be found in [Protocol Revenue Streams](#protocol-revenue-streams).
 
 # Zero Knowledge Rollup
 
-The Resistance Protocol and its on chain coordination games should be delpoyed
+The Resistance Protocol and its on chain coordination games should be deployed
 on a zero knowledge rollup like [zksync](https://zksync.io). Its security and
 performance guarantees are perfectly suited for user facing protocols
 considering current cost of operation on Ethereum mainnet.
@@ -305,7 +305,7 @@ otherwise have to be backed extensively by the treasury. RSX trading below PF is
 good for the treasury's capital efficiency and therefore in last consequence
 good for stakeholders. RSX trading below PF provides tremendous opportunities
 for arbitrageurs to bring RSX back to PF. The dominant strategy for RSX trading
-below or near PF is to long RSX, perpetuating the infinite flyhweel effect
+below or near PF is to long RSX, perpetuating the infinite flywheel effect
 further.
 
 RSX moving inbetween PF and PC implies increasing RFV by selling bonds for e.g.
@@ -315,14 +315,14 @@ the treasury's capital efficiency and therefore in last consequence good for
 stakeholders. RSX trading between PF and PC provides tremendous opportunities
 for bonders to benefit from the available bond volume. The dominant
 strategy for RSX trading between PF and PC is to bond e.g. DAI for RSX,
-perpetuating the infinite flyhweel effect further.
+perpetuating the infinite flywheel effect further.
 
 RSX moving above PC implies increasing RFV by selling RSX into the market for
 e.g. DAI. RSX trading above PC is good for the treasury's capital efficiency and
 therefore in last consequence good for stakeholders. RSX trading above PC
 provides tremendous opportunities for arbitrageurs to bring RSX back to PC. The
 dominant strategy for RSX trading above or near PC is to short RSX, perpetuating
-the infinite flyhweel effect further.
+the infinite flywheel effect further.
 
 ![Inifinite Flywheel Effect](./img/infinite_flywheel_effect.png)
 
